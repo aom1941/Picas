@@ -2,7 +2,6 @@ export type WallID = string;
 export type ImageID = string;
 export type HotspotID = string;
 export type PersonaID = string;
-export type PeerID = string;
 
 export type Mode =
   | { type: 'overview' }

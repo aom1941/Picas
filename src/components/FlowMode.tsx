@@ -24,12 +24,12 @@ export function FlowMode() {
   const { dispatch, state } = useAppState();
 
   const lines = useMemo(() => {
-    return LINKS.map((link) => {
-      const sourceList = FLOW_POSITIONS[link.source];
-      const targetList = FLOW_POSITIONS[link.target];
-      if (!sourceList || !targetList) return null;
-      return { ...link, sourcePos: sourceList, targetPos: targetList };
-    }).filter(Boolean);
+    return LINKS.flatMap((link) => {
+      const sourcePos = FLOW_POSITIONS[link.source];
+      const targetPos = FLOW_POSITIONS[link.target];
+      if (!sourcePos || !targetPos) return [];
+      return [{ ...link, sourcePos, targetPos }];
+    });
   }, []);
 
   return (
@@ -73,14 +73,12 @@ export function FlowMode() {
                </linearGradient>
             </defs>
             {lines.map((line) => (
-               <motion.line
-                  key={line?.id}
-                  x1={`${line?.sourcePos.x}%`}
-                  y1={`${line?.sourcePos.y}%`}
-                  x2={`${line?.targetPos.x}%`}
-                  y2={`${line?.targetPos.y}%`}
+               <motion.path
+                  key={line.id}
+                  d={`M ${line.sourcePos.x}% ${line.sourcePos.y}% L ${line.targetPos.x}% ${line.targetPos.y}%`}
                   stroke="url(#lineGrad)"
-                  strokeWidth={line!.weight * 4}
+                  strokeWidth={line.weight * 4}
+                  fill="none"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
@@ -126,7 +124,7 @@ export function FlowMode() {
                   {/* Tooltip */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 transition-opacity">
                      <span className="font-mono text-[10px] text-white uppercase text-center block px-2 leading-tight">
-                        {img.title}<br/>{img.punctumScore * 100}
+                        {img.title}<br/>{Math.round(img.punctumScore * 100)}%
                      </span>
                   </div>
                </motion.div>
