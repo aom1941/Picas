@@ -3,7 +3,6 @@ import React from 'react';
 import { IMAGES, WALLS } from '../data';
 import { useAppState } from '../store';
 import { ArrowLeft, Network, Ruler } from 'lucide-react';
-import { ContinuityToken } from '../types';
 
 interface WallDetailModeProps {
   wallId: string;
@@ -47,8 +46,10 @@ export function WallDetailMode({ wallId }: WallDetailModeProps) {
           </div>
         </div>
         <div className="flex gap-4">
-           <button 
-            className="flex items-center gap-2 px-4 py-2 text-[10px] uppercase font-mono border border-white/20 rounded-full hover:bg-white/10 transition-colors tracking-wider"
+           <button
+            disabled
+            title="Measure tool coming soon"
+            className="flex items-center gap-2 px-4 py-2 text-[10px] uppercase font-mono border border-white/10 rounded-full opacity-40 cursor-not-allowed tracking-wider"
           >
             <Ruler size={14} />
             <span>Measure</span>

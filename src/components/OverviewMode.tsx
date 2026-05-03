@@ -54,7 +54,7 @@ export function OverviewMode() {
                 layoutId={`wall-container-${wall.id}`}
                 layout
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="absolute border border-white/10 bg-[#1A1A1C] cursor-pointer hover:border-[#F27D26] transition-colors group flex items-end justify-center"
+                className="absolute border border-white/10 bg-[#1A1A1C] cursor-pointer hover:border-[#F27D26] transition-colors group flex items-end justify-center overflow-hidden"
                 style={{
                   width,
                   height: depth,

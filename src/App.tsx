@@ -14,7 +14,7 @@ function ModeRenderer() {
   const { state } = useAppState();
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {state.mode.type === 'overview' && <OverviewMode key="overview" />}
       {state.mode.type === 'wall' && <WallDetailMode key={`wall-${state.mode.wallId}`} wallId={state.mode.wallId} />}
       {state.mode.type === 'flow' && <FlowMode key="flow" />}
